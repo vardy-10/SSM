@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -17,8 +18,8 @@ public class UserController {
     private IUserService userService;
 
     @RequestMapping("/select")
-    public String selectUser(Model model) throws Exception {
-        User user = userService.selectUser(1);
+    public String selectUser(Model model,@RequestParam(required = true) String id) throws Exception {
+        User user = userService.selectUser(Integer.parseInt(id));
         model.addAttribute("user",user);
         return "user" ;
     }
